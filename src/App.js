@@ -13,6 +13,9 @@ function App() {
 		// catch errors using try and catch
 		try {
 			let colors = new Values(color).all(10);
+			// update state value of list with colors
+      setList(colors);
+      setError(false);
 			console.log(colors);
 		} catch (error) {
 			// if the value entered is not a color then set setError to true and log error
@@ -38,8 +41,20 @@ function App() {
 					</button>
 				</form>
 			</section>
+
 			<section className="colors">
-				<h4> list goes here </h4>
+				{/* fill the list with different shades of the selected color using map */}
+				{list.map((color, index) => {
+					console.log(color);
+					return (
+						<SingleColor
+							key={index}
+							{...color}
+							index={index}
+							hexColor={color.hex}
+						/>
+					);
+				})}
 			</section>
 		</>
 	);
